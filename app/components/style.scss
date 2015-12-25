@@ -22,3 +22,69 @@ $title-font-size: 1.8 * $unit;
     z-index: $z-index-higher;
   }
 }
+.gallery {
+  float: left;
+  height: 730px;
+  width:60%;
+  padding-left: 10px;
+  overflow-y: scroll;
+}
+.loader{
+  clear:both;
+  margin-top:30px;
+  width:200px;
+  margin-left:495px;
+}
+.infiniteListItem {
+  color:#547696;
+  display: block;
+  padding-top: 90px;
+  float: left;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  background-color: #89B9E8;
+  vertical-align: middle;
+  margin: 5px;
+}
+.infiniteListItem:hover{
+  background-color: #9bcfff;
+}
+.infoBlock {
+  padding-top: 5px;
+  float:right;
+  width:40%;
+  height: 730px;
+}
+.infoTable {
+  width: 100%;
+}
+.infoTable td {
+  height: 40px;
+  font-size: 0.8em;
+}
+.infoTable td:first-child {
+  width: 28%;
+}
+.infoTable td:last-child {
+  color:#828282;
+}
+.imagePreview{
+  color:#547696;
+  width: 300px;
+  height:200px;
+  background-color:#89B9E8;
+  text-align:center;
+  padding-top:85px;
+  margin:auto;
+}
+.buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+.buttons button {
+  width:180px;
+}
+.buttons button:first-child {
+  margin-right: 70px;
+}
