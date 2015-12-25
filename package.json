@@ -65,6 +65,9 @@
   },
   "repository": "github:react-toolbox/react-toolbox-example",
   "dependencies": {
-    "react-infinite": "^0.7.3"
+    "material-ui": "^0.14.0-rc2",
+    "react-infinite": "^0.7.3",
+    "react-tap-event-plugin": "^0.2.1",
+    "superagent": "^1.6.1"
   }
 }
