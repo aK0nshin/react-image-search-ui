@@ -23,6 +23,7 @@ var Input = React.createClass ({
     render: function () {
         var currentSearch = this.state.countries;
         return (
+            <div className={style.searchBox}>
             <Autocomplete
             direction="down"
             label="Введите запрос:"
@@ -30,6 +31,7 @@ var Input = React.createClass ({
             source={source}
             value={currentSearch}
             />
+            </div>
 
         );
     }
