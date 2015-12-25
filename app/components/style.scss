@@ -22,6 +22,13 @@ $title-font-size: 1.8 * $unit;
     z-index: $z-index-higher;
   }
 }
+.searchBox {
+  width:50%;
+  margin-left:55px;
+}
+.searchBox input {
+  border:1px solid #d3d3d3
+}
 .gallery {
   float: left;
   height: 730px;
