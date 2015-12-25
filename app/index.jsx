@@ -6,13 +6,15 @@ import ToolboxApp from 'react-toolbox/lib/app';
 import Button from 'react-toolbox/lib/button';
 import Header from './components/header';
 import Input from './components/Input';
-import InfiniteList from './components/InfiniteList';
+import Gallery from './components/gallery';
+import InfoBlock from './components/infoBlock';
 import style from './style';
 
 ReactDOM.render((
-  <ToolboxApp>
+    <ToolboxApp>
     <Header />
-    <Input token="Utyhb[Uthw2015PB" />
-    <InfiniteList />
+    <Input />
+    <Gallery />
+    <InfoBlock />
     </ToolboxApp>
 ), document.getElementById('app'));
