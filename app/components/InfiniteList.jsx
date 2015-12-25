@@ -1,10 +1,12 @@
 import React from 'react';
 import ListItem from '../components/ListItem';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
+import style from './style';
 
 var InfiniteList = React.createClass({
     getInitialState: function() {
         return {
-            elements: this.buildElements(0, 50),
+            elements: this.buildElements(0, 100),
             isInfiniteLoading: false
 
         }
@@ -41,20 +43,20 @@ var InfiniteList = React.createClass({
     },
 
     elementInfiniteLoad: function() {
-        return <div className="infinite-list-item">
-        Loading...
+        return <div className={style.loader}>
+        <ProgressBar type="circular" mode="indeterminate" />
             </div>;
 
     },
 
     render: function() {
-        return <Infinite elementHeight={50}
-        containerHeight={250}
+        return <Infinite elementHeight={20}
+        containerHeight={730}
         infiniteLoadBeginEdgeOffset={200}
         onInfiniteLoad={this.handleInfiniteLoad}
         loadingSpinnerDelegate={this.elementInfiniteLoad()}
         isInfiniteLoading={this.state.isInfiniteLoading}
-        timeScrollStateLastsForAfterUserScrolls={1000}
+        timeScrollStateLastsForAfterUserScrolls={0}
         >
         {this.state.elements}
         </Infinite>;
