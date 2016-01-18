@@ -1,6 +1,7 @@
 // You can also include here commons if you want with import 'react-toolbox/lib/commons';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Superagent from 'superagent';
 import ToolboxApp from 'react-toolbox/lib/app';
 import Button from 'react-toolbox/lib/button';
 import Header from './components/header';
@@ -10,7 +11,7 @@ import InfoBlock from './components/infoBlock';
 import style from './style';
 
 ReactDOM.render((
-  <ToolboxApp>
+    <ToolboxApp>
     <Header />
     <Input />
     <Gallery />
