@@ -13,18 +13,20 @@ const source = {
 
 const origin = 'http://dev-fotobank.mirtv.ru';
 
-var SuperagentSearch = Superagent.post(origin + '/image/search');
-var SuperagentSuggest = Superagent.get(origin + "/image/suggest");
+var SuperagentSearch = Superagent.post(origin + '/image/search/');
+var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uthw2015PB&term=путин");
 
 var Input = React.createClass ({
     superagent: {search:SuperagentSearch, suggest:SuperagentSuggest},
 
     handleChange: function(value) {
-        this.setState({query: value});
-        this.superagent.search
-        .send({'query':this.state.value, 'token':'Utyhb[Uthw2015PB'})
+        this.superagent.search.send({query:"путин", page:0, token:"Utyhb[Uthw2015PB"})
         .end(function(){});
-        console.log('change1');
+    },
+
+    handleEdit: function(value) {
+      debug.log("Gothhca!");
+      debug.log(value);
     },
 
     componentWillMount: function(){
@@ -44,6 +46,7 @@ var Input = React.createClass ({
             direction="down"
             label="Введите запрос:"
             onChange={this.handleChange}
+            onEdit={this.handleEdit}
             source={source}
             value={currentSearch}
             />

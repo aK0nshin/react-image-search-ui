@@ -3,6 +3,12 @@ import ListItem from '../components/ListItem';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
 import style from './style';
 
+function getImageStore() {
+  return {
+    allTodos: ImageStore.getAll()
+  };
+}
+
 var InfiniteList = React.createClass({
     getInitialState: function() {
         return {

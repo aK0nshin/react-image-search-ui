@@ -68,6 +68,10 @@
     "material-ui": "^0.14.0-rc2",
     "react-infinite": "^0.7.3",
     "react-tap-event-plugin": "^0.2.1",
-    "superagent": "^1.6.1"
+    "superagent": "^1.6.1",
+    "flux": "*",
+    "es6-promise": "*",
+    "object-assign": "*",
+    "keymirror":"*"
   }
 }
