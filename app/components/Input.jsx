@@ -2,14 +2,6 @@ import React from 'react';
 import Superagent from 'superagent';
 import style from './style';
 
-const source = {
-    'ES': 'Spain',
-    'TH': 'Thailand',
-    'EN': 'England',
-    'US': 'USA'
-
-};
-
 const origin = 'http://dev-fotobank.mirtv.ru';
 
 var SuperagentSearch = Superagent.post(origin + '/image/search/');
