@@ -1,7 +1,6 @@
 import React from 'react';
 import Superagent from 'superagent';
 import style from './style';
-import Autocomplete from 'react-toolbox/lib/autocomplete';
 
 const source = {
     'ES': 'Spain',
@@ -19,37 +18,21 @@ var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uth
 var Input = React.createClass ({
     superagent: {search:SuperagentSearch, suggest:SuperagentSuggest},
 
-    handleChange: function(value) {
-        this.superagent.search.send({query:"путин", page:0, token:"Utyhb[Uthw2015PB"})
-        .end(function(){});
+    handleKeyDown: function(event){
+        if(event.keyCode == 13){
+            this.superagent.search.send({query:this.state.query, page:0, token:"Utyhb[Uthw2015PB"})
+                .end(function(){});
+        }
     },
 
-    handleEdit: function(value) {
-      debug.log("Gothhca!");
-      debug.log(value);
-    },
-
-    componentWillMount: function(){
-        this.setState({query: []});
-        this.setState({source:source});
-    },
-
-    componentDidMount(){
-        console.log(this.props);
+    handleChange: function(event) {
+        this.setState({ query: event.target.value });
     },
 
     render: function () {
-        var currentSearch = this.state.query;
         return (
             <div className={style.searchBox}>
-            <Autocomplete
-            direction="down"
-            label="Введите запрос:"
-            onChange={this.handleChange}
-            onEdit={this.handleEdit}
-            source={source}
-            value={currentSearch}
-            />
+                <input className={style.searchInput} placeholder="Введите запрос" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
             </div>
 
         );
