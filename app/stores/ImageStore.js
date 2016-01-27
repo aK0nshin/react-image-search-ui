@@ -1,28 +1,36 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
-var AppUtils = require('../utils/AppUtils');
+var AppUtils = require('../utils/ImageUtils');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
+var SearchQuery = null;
 var _images = {};
+_images.images = {};
 
-function _addImages(rawImages) {
-  rawImages.forEach(function(image) {
-    if (!_images[image.id]) {
-      _images[image.id] = AppUtils.convertRawImage(
-        image
+function _addImages(rawImages, query) {
+  if (query!=SearchQuery){
+    SearchQuery=query;
+    _images = {};
+    _images.images = {};
+  }
+  var imageArray = rawImages.images;
+  imageArray.forEach(
+      function(image) {
+        if (!_images['images'][image.image_id]) {
+          _images['images'][image.image_id] = AppUtils.convertRawImage(
+          image
       );
     }
   });
+  _images.hasMore = rawImages.hasMore;
 }
 
 var ImageStore = assign({}, EventEmitter.prototype, {
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
+  emitChange: function(query, page) {
+    this.emit(CHANGE_EVENT, query, page);
   },
 
   /**
@@ -37,30 +45,20 @@ var ImageStore = assign({}, EventEmitter.prototype, {
   },
 
   get: function(id) {
-    return _Images[id];
+    return _images['images'][id];
   },
 
   getAll: function() {
-    return _Images;
+    return _images;
   },
 
 });
 
 ImageStore.dispatchToken = AppDispatcher.register(function(action) {
-
   switch (action.type) {
-
-    case ActionTypes.CREATE_IMAGE:
-      var image = AppUtils.getCreatedImageData(
-        action.link
-      );
-      _images[image.id] = image;
-      ImageStore.emitChange();
-      break;
-
     case ActionTypes.RECEIVE_RAW_IMAGES:
-      _addImages(action.rawImages);
-      ImageStore.emitChange();
+      _addImages(action.rawImages, action.query);
+      ImageStore.emitChange(action.query, action.page);
       break;
 
     default:

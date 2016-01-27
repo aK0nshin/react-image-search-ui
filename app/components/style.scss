@@ -45,7 +45,7 @@ $title-font-size: 1.8 * $unit;
   height: 730px;
   width:60%;
   padding-left: 10px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 .loader{
   clear:both;
@@ -54,16 +54,30 @@ $title-font-size: 1.8 * $unit;
   margin-left:495px;
 }
 .infiniteListItem {
+  position:relative;
   color:#547696;
   display: block;
-  padding-top: 90px;
   float: left;
   width: 200px;
   height: 200px;
   text-align: center;
-  background-color: #89B9E8;
   vertical-align: middle;
   margin: 5px;
+}
+.imgMask {
+  cursor:pointer;
+  position:absolute;
+  width: 200px;
+  height: 200px;
+  background:rgba(0, 0, 0, 0.07);
+}
+.imgMask:hover{
+  background:rgba(0, 0, 0, 0);
+
+}
+.infiniteListItem>img {
+  width: 200px;
+  height: 200px;
 }
 .infiniteListItem:hover{
   background-color: #9bcfff;
@@ -74,11 +88,20 @@ $title-font-size: 1.8 * $unit;
   width:40%;
   height: 730px;
 }
+.infoBlockEmpty {
+  color: #B3B3B3;
+  font-size:2em;
+  padding-top: 350px;
+  text-align: center;
+  float:right;
+  width:40%;
+  height: 730px;
+}
 .infoTable {
   width: 100%;
 }
 .infoTable td {
-  height: 40px;
+  height: 50px;
   font-size: 0.8em;
 }
 .infoTable td:first-child {
@@ -88,13 +111,16 @@ $title-font-size: 1.8 * $unit;
   color:#828282;
 }
 .imagePreview{
-  color:#547696;
+  border:none;
   width: 300px;
   height:200px;
   background-color:#89B9E8;
   text-align:center;
-  padding-top:85px;
   margin:auto;
+}
+.imagePreview>img{
+  width: 300px;
+  height:200px;
 }
 .buttons {
   margin-top: 20px;

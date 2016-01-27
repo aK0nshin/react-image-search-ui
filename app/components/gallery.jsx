@@ -7,7 +7,6 @@ var Gallery = React.createClass({
         return <div className={style.gallery}>
             <InfiniteList />
         </div>;
-
     }
 
 });

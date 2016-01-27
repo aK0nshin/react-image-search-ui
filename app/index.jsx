@@ -10,10 +10,8 @@ import Gallery from './components/gallery';
 import InfoBlock from './components/infoBlock';
 import style from './style';
 import ImageExampleData from './ImageExampleData';
-import WebAPIUtils from './utils/WebAPIUtils';
 
 ImageExampleData.init();
-WebAPIUtils.getAllImages();
 
 ReactDOM.render((
     <ToolboxApp>

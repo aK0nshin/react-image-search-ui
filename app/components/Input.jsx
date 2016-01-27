@@ -1,6 +1,8 @@
 import React from 'react';
 import Superagent from 'superagent';
 import style from './style';
+import WebAPIUtils from './../utils/WebAPIUtils';
+
 
 const origin = 'http://dev-fotobank.mirtv.ru';
 
@@ -12,8 +14,7 @@ var Input = React.createClass ({
 
     handleKeyDown: function(event){
         if(event.keyCode == 13){
-            this.superagent.search.send({query:this.state.query, page:0, token:"Utyhb[Uthw2015PB"})
-                .end(function(){});
+            WebAPIUtils.getImages(0, this.state.query);
         }
     },
 

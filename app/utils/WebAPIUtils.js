@@ -1,4 +1,6 @@
 var ServerActionCreators = require('../actions/ServerActionCreators');
+var Superagent = require('superagent');
+var ImageStore = require('../stores/ImageStore');
 
 // !!! Please Note !!!
 // We are using localStorage as an example, but in a real-world scenario, this
@@ -9,12 +11,20 @@ var ServerActionCreators = require('../actions/ServerActionCreators');
 
 module.exports = {
 
-  getAllImages: function() {
+  getImages: function(page, query) { //Нужно добавить query
     // simulate retrieving data from a database
-    var rawImages= JSON.parse(localStorage.getItem('images'));
 
-    // simulate success callback
-    ServerActionCreators.receiveAll(rawImages);
+    var superagent = Superagent.post('http://dev-fotobank.mirtv.ru/image/search/');
+    superagent.send({query:query, page:page, token:"Utyhb[Uthw2015PB", external_client: true})
+        .end(function(err, res){
+          var rawImages = {};
+          rawImages.images = res.body.data;
+          rawImages.hasMore= res.body.meta.hasMore;
+          ServerActionCreators.receiveAll(rawImages, query, page);
+
+        });
+
+
   },
 
   createImages: function(images) {
