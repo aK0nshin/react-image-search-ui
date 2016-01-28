@@ -6,9 +6,22 @@ import ImageStore from '../stores/ImageStore';
 
 
 var Buttons = React.createClass({
+    insertClick: function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:84/image/getbinary/7', true);
+        xhr.onload = function() {
+            window.handle(this.responseText);
+            window.close();
+        };
+        xhr.onerror = function() {
+            alert( 'Ошибка получения файла!' + this.status );
+        };
+        xhr.send();
+    }
+    ,
     render: function(){
         return <div className={style.buttons}>
-        <Button label='Вставить' raised accent/>
+        <Button label='Вставить' onClick={this.insertClick} raised accent/>
         <Button label='Сделать что-то еще' raised primary/>
         </div>
     }
@@ -17,20 +30,30 @@ var Buttons = React.createClass({
 var InfoBlock = React.createClass({
     getInitialState: function() {
         return {
-            info: false
+            info: false,
+            firstAppear: false
         }
     },
     componentDidMount: function() {
         ListItem.addClickListener(this._onItemClick);
+        ImageStore.addChangeListener(this._onStoreChange);
     },
     componentWillUnmount: function() {
         ListItem.removeClickListener(this._onItemClick);
+        ImageStore.removeChangeListener(this._onStoreChange);
     },
     _onItemClick: function(id){
         var info = ImageStore.get(id);
         this.setState({
             info:info
         });
+    },
+    _onStoreChange: function(query, page){
+        if(page==0) {
+            this.setState({
+                firstAppear: true
+            });
+        }
     },
     render: function() {
         if (this.state.info!=false){
@@ -60,9 +83,14 @@ var InfoBlock = React.createClass({
                 <Buttons />
             </div>;
         } else {
-            return <div className={style.infoBlockEmpty}>
-                Выберите изображение
-            </div>;
+            if (this.state.firstAppear) {
+                return <div className={style.infoBlockEmpty}>
+                    Выберите изображение
+                </div>;
+            } else {
+                return <div className={style.infoBlockEmpty}>
+                </div>;
+            }
         }
 
 

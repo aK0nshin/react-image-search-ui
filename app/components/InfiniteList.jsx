@@ -72,15 +72,21 @@ var InfiniteList = React.createClass({
     },
 
     render: function() {
-            return <Infinite elementHeight={20}
-                             containerHeight={730}
-                             infiniteLoadBeginEdgeOffset={10}
-                             onInfiniteLoad={this.handleInfiniteLoad}
-                             loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                             isInfiniteLoading={this.state.isInfiniteLoading}
-                >
-                {this.state.elements}
-            </Infinite>;
+            if (this.state.elements) {
+                return <div className={style.gallery}>
+                    <Infinite elementHeight={20}
+                              containerHeight={730}
+                              infiniteLoadBeginEdgeOffset={10}
+                              onInfiniteLoad={this.handleInfiniteLoad}
+                              loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                              isInfiniteLoading={this.state.isInfiniteLoading}
+                        >
+                        {this.state.elements}
+                    </Infinite>
+                </div>;
+            } else {
+                return false;
+            }
     }
 
 });

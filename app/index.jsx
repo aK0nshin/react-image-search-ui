@@ -6,8 +6,8 @@ import ToolboxApp from 'react-toolbox/lib/app';
 import Button from 'react-toolbox/lib/button';
 import Header from './components/header';
 import Input from './components/Input';
-import Gallery from './components/gallery';
 import InfoBlock from './components/infoBlock';
+import InfiniteList from './components/InfiniteList';
 import style from './style';
 import ImageExampleData from './ImageExampleData';
 
@@ -17,7 +17,7 @@ ReactDOM.render((
     <ToolboxApp>
     <Header />
     <Input />
-    <Gallery />
+    <InfiniteList />
     <InfoBlock />
     </ToolboxApp>
 ), document.getElementById('app'));

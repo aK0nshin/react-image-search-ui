@@ -8,6 +8,33 @@ $title-font-size: 1.8 * $unit;
 // your build comes with React Toolbox's and we can't
 // ensure the order. You can either set a wrapper or target
 // React Toolbox data attributes to boost
+::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+
+}
+body {
+  background-color: #525252;
+  background-image: url("http://localhost:82/images/Mir24.png");
+  background-repeat: no-repeat;
+  background-position: 50% 12%;
+
+}
+.appbar{
+  box-shadow: -3px 2px 30px 0px rgba(0, 0, 0, 0.5);
+  background:#5CA281;
+  /*background:#2ea86f;*/
+}
 .appbar {
   > .title {
     font-size: $title-font-size;
@@ -27,7 +54,11 @@ $title-font-size: 1.8 * $unit;
   margin-left:55px;
 }
 .searchBox input {
-  border:1px solid #d3d3d3
+  background: rgba(255, 255, 255, 0.25);
+  color:#FFF;
+  border:none;
+  border-radius: 0.2rem;
+  border-bottom:2px solid grey;
 }
 .searchInput {
   padding: 0 5px;
@@ -37,8 +68,7 @@ $title-font-size: 1.8 * $unit;
   margin-bottom: 15px;
 }
 .searchInput:focus{
-  border: 1px solid #89b9e8;
-  background-color:#F6FBFF;
+  border-bottom: 2px solid #2ea86f;
 }
 .gallery {
   float: left;
@@ -69,7 +99,7 @@ $title-font-size: 1.8 * $unit;
   position:absolute;
   width: 200px;
   height: 200px;
-  background:rgba(0, 0, 0, 0.07);
+  background:rgba(0, 0, 0, 0.12);
 }
 .imgMask:hover{
   background:rgba(0, 0, 0, 0);
@@ -101,6 +131,7 @@ $title-font-size: 1.8 * $unit;
   width: 100%;
 }
 .infoTable td {
+  color: #FFF;
   height: 50px;
   font-size: 0.8em;
 }
@@ -108,7 +139,7 @@ $title-font-size: 1.8 * $unit;
   width: 28%;
 }
 .infoTable td:last-child {
-  color:#828282;
+  color:#C1C1C1;
 }
 .imagePreview{
   border:none;
