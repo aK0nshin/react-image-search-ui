@@ -8,7 +8,7 @@ import ImageStore from '../stores/ImageStore';
 var Buttons = React.createClass({
     insertClick: function(){
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost:84/image/getbinary/7', true);
+        xhr.open('POST', 'http://dev-fotobank.mirtv.ru/image/getbinary/', true);
         xhr.onload = function() {
             window.handle(this.responseText);
             window.close();
@@ -16,7 +16,7 @@ var Buttons = React.createClass({
         xhr.onerror = function() {
             alert( 'Ошибка получения файла!' + this.status );
         };
-        xhr.send();
+        xhr.send('local_path='+this.props.local_path);
     }
     ,
     render: function(){
@@ -80,7 +80,7 @@ var InfoBlock = React.createClass({
                         <tr><td>Теги</td><td>{this.state.info.tags}</td></tr>
                     </table>
                 </div>
-                <Buttons />
+                <Buttons local_path={this.state.info.local_path}/>
             </div>;
         } else {
             if (this.state.firstAppear) {

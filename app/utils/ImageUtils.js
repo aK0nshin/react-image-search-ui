@@ -6,6 +6,7 @@ convertRawImage: function(rawImage) {
       id: rawImage.image_id,
       link: 'http://dev-fotobank.mirtv.ru/'+rawImage.webpath,
       thumb_path: thumb,
+      local_path: rawImage.local_path,
       title: rawImage.MFTitle,
       description: rawImage.MFDescription,
       category: rawImage.MFCategory,
