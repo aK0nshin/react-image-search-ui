@@ -42,8 +42,7 @@ var InfiniteList = React.createClass({
         var allImg = getImageStore();
         var elements = [];
         for(var i in allImg.allImages.images) {
-            var link = (allImg.allImages.images[i]['thumb_path']) ? allImg.allImages.images[i]['thumb_path'] : 'http://localhost:82/images/no-preview.png';
-            elements.push(<ListItem key={allImg.allImages.images[i]['id']} imageId={allImg.allImages.images[i]['id']} link={link}/>);
+            elements.push(<ListItem key={allImg.allImages.images[i]['id']} imageId={allImg.allImages.images[i]['id']} link={allImg.allImages.images[i]['thumb_path']}/>);
         }
         if (allImg.allImages.hasMore){
             var page = ++this.state.page;

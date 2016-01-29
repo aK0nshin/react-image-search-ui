@@ -16,10 +16,16 @@ var ListItem = React.createClass({
         this.eventEmitter.emit(ITEM_CLICK, this.props.imageId);
     },
     render: function() {
-        return <div className={style.infiniteListItem} onClick={this.onClick}>
-            <div className={style.imgMask}></div>
-            <img id={this.props.key} src={this.props.link}/>
-        </div>;
+        if (this.props.link) {
+            return <div className={style.infiniteListItem} onClick={this.onClick}>
+                <div className={style.imgMask}></div>
+                <img id={this.props.key} src={this.props.link}/>
+            </div>;
+        } else {
+            return <div className={style.noThumb} onClick={this.onClick}>
+                <div className={style.imgMask}></div>
+            </div>;
+        }
     }
 });
 ListItem.addClickListener = function(callback) {

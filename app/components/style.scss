@@ -94,6 +94,15 @@ body {
   vertical-align: middle;
   margin: 5px;
 }
+.noThumb {
+  background: url('http://localhost:82/images/no-preview.png');
+  position:relative;
+  display: block;
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
 .imgMask {
   cursor:pointer;
   position:absolute;
