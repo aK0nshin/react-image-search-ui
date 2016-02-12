@@ -14,7 +14,7 @@ module.exports = {
   getImages: function(page, query) { //Нужно добавить query
     // simulate retrieving data from a database
 
-    var superagent = Superagent.post('http://dev-fotobank.mirtv.ru/image/search/');
+    var superagent = Superagent.post('https://dev-fotobank.mirtv.ru/image/search/');
     superagent.send({query:query, page:page, token:"Utyhb[Uthw2015PB", external_client: true})
         .end(function(err, res){
           var rawImages = {};

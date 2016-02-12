@@ -8,7 +8,7 @@ import ImageStore from '../stores/ImageStore';
 var Buttons = React.createClass({
     insertClick: function(){
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://dev-fotobank.mirtv.ru/image/getbinary/', true);
+        xhr.open('POST', 'https://dev-fotobank.mirtv.ru/image/getbinary/', true);
         xhr.onload = function() {
             window.handle(this.responseText);
             window.close();
