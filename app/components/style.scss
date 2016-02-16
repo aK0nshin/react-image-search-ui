@@ -172,3 +172,7 @@ body {
 .buttons button:first-child {
   margin-right: 70px;
 }
+.sidebar {
+  width: 500px !important;
+  overflow-y: auto !important;
+}

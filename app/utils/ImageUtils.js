@@ -2,9 +2,11 @@ module.exports = {
 
 convertRawImage: function(rawImage) {
     var thumb = (rawImage.thumb_path) ? 'http://dev-fotobank.mirtv.ru/'+rawImage.thumb_path : false;
-    return {
+    var origin = (rawImage.image_id_obsolete) ? 'obsolete' : 'new';
+
+  return {
       id: rawImage.image_id,
-      link: 'https://dev-fotobank.mirtv.ru/'+rawImage.webpath,
+      link: 'http://dev-fotobank.mirtv.ru/'+rawImage.webpath,
       thumb_path: thumb,
       local_path: rawImage.local_path,
       title: rawImage.MFTitle,
@@ -12,10 +14,11 @@ convertRawImage: function(rawImage) {
       category: rawImage.MFCategory,
       locality: rawImage.MFLocality,
       author: rawImage.MFAuthor,
-      origin: rawImage.MFSource,
+      source: rawImage.MFSource,
       eventDate: rawImage.MFEventDate,
       creationDate: rawImage.MFCreationDate,
-      tags: rawImage.MFNotes
+      tags: rawImage.MFNotes,
+      origin: origin
     };
   },
 

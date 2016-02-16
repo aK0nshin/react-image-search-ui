@@ -8,6 +8,7 @@ import Header from './components/header';
 import Input from './components/Input';
 import InfoBlock from './components/infoBlock';
 import InfiniteList from './components/InfiniteList';
+import Options from './components/options';
 import style from './style';
 import ImageExampleData from './ImageExampleData';
 
@@ -17,6 +18,7 @@ ReactDOM.render((
     <ToolboxApp>
     <Header />
     <Input />
+    <Options />
     <InfiniteList />
     <InfoBlock />
     </ToolboxApp>

@@ -12,6 +12,11 @@ module.exports = {
       query: query,
       page: page
     });
+  },
+  changeFilter: function(){
+    AppDispatcher.dispatch({
+      type: ActionTypes.CHANGE_FILTER_STATE
+    });
   }
 
 

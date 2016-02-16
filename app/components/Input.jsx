@@ -4,7 +4,7 @@ import style from './style';
 import WebAPIUtils from './../utils/WebAPIUtils';
 
 
-const origin = 'https://dev-fotobank.mirtv.ru';
+const origin = 'http://dev-fotobank.mirtv.ru';
 
 var SuperagentSearch = Superagent.post(origin + '/image/search/');
 var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uthw2015PB&term=путин");

@@ -12,7 +12,6 @@ var ListItem = React.createClass({
     eventEmitter:EventEmitter.prototype,
 
     onClick: function(){
-        var m;
         this.eventEmitter.emit(ITEM_CLICK, this.props.imageId);
     },
     render: function() {
@@ -29,7 +28,6 @@ var ListItem = React.createClass({
     }
 });
 ListItem.addClickListener = function(callback) {
-    var m;
     EventEmitter.prototype.on(ITEM_CLICK, callback);
 };
 ListItem.removeClickListener = function(callback){

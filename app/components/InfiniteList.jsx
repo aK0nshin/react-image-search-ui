@@ -5,30 +5,32 @@ import style from './style';
 import ImageStore from '../stores/ImageStore';
 import WebAPIUtils from './../utils/WebAPIUtils';
 
-function getImageStore() {
-  return {
-    allImages: ImageStore.getAll()
-  };
-}
-
 var InfiniteList = React.createClass({
 
     componentDidMount: function() {
         ImageStore.addChangeListener(this._onChange);
+        ImageStore.addChangeFilterListener(this._onChangeFilter);
     },
     componentWillUnmount: function() {
         ImageStore.removeChangeListener(this._onChange);
+        ImageStore.removeChangeFilterListener(this._onChangeFilter);
     },
     _onChange: function(query, page) {
         this.setState({
             firstStart:false,
-            page:page,
-            isInfiniteLoading: true
+            isInfiniteLoading: true,
+            page:page
         });
-        var newElements = this.buildElements();
+        var newElements = this.buildElements('new');
         this.setState({
             elements: newElements,
             query:query
+        });
+    },
+    _onChangeFilter: function(){
+        var filteredElements = this.buildElements('filter');
+        this.setState({
+            elements: filteredElements
         });
     },
     getInitialState: function(){
@@ -38,13 +40,13 @@ var InfiniteList = React.createClass({
     },
 
 
-    buildElements: function() {
-        var allImg = getImageStore();
+    buildElements: function(mode) {
+        var allImg = ImageStore.getAll();
         var elements = [];
-        for(var i in allImg.allImages.images) {
-            elements.push(<ListItem key={allImg.allImages.images[i]['id']} imageId={allImg.allImages.images[i]['id']} link={allImg.allImages.images[i]['thumb_path']}/>);
+        for(var i in allImg.images) {
+            elements.push(<ListItem key={allImg.images[i]['id']} imageId={allImg.images[i]['id']} link={allImg.images[i]['thumb_path']}/>);
         }
-        if (allImg.allImages.hasMore){
+        if (allImg.hasMore && mode == 'new'){
             var page = ++this.state.page;
             this.setState({
                 page:page,
@@ -55,7 +57,7 @@ var InfiniteList = React.createClass({
     },
 
     handleInfiniteLoad: function() {
-        if (!this.state.firstStart) {
+        if (!this.state.firstStart) { //Проверить на пустоту
             WebAPIUtils.getImages(this.state.page, this.state.query);
         } else {
             this.setState({

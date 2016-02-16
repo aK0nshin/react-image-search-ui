@@ -8,7 +8,7 @@ import ImageStore from '../stores/ImageStore';
 var Buttons = React.createClass({
     insertClick: function(){
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://dev-fotobank.mirtv.ru/image/getbinary/', true);
+        xhr.open('POST', 'http://dev-fotobank.mirtv.ru/image/getbinary/', true);
         xhr.onload = function() {
             window.handle(this.responseText);
             window.close();
@@ -74,7 +74,7 @@ var InfoBlock = React.createClass({
                         <tr><td>Категория</td><td>{this.state.info.category}</td></tr>
                         <tr><td>Место</td><td>{this.state.info.locality}</td></tr>
                         <tr><td>Автор</td><td>{this.state.info.author}</td></tr>
-                        <tr><td>Источник</td><td>{this.state.info.origin}</td></tr>
+                        <tr><td>Источник</td><td>{this.state.info.source}</td></tr>
                         <tr><td>Дата события</td><td>{this.state.info.eventDate}</td></tr>
                         <tr><td>Дата поступления</td><td>{this.state.info.creationDate}</td></tr>
                         <tr><td>Теги</td><td>{this.state.info.tags}</td></tr>
