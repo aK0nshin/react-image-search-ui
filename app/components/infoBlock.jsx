@@ -81,6 +81,7 @@ var InfoBlock = React.createClass({
                         <tr><td>Источник</td><td>{this.state.info.source}</td></tr>
                         <tr><td>Дата события</td><td>{this.state.info.eventDate}</td></tr>
                         <tr><td>Дата поступления</td><td>{this.state.info.creationDate}</td></tr>
+                        <tr><td>Оригинальный размер</td><td>{this.state.info.width}px x {this.state.info.height}px</td></tr>
                         <tr><td>Теги</td><td>{this.state.info.tags}</td></tr>
                     </table>
                 </div>
