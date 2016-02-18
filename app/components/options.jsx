@@ -75,7 +75,10 @@ var Options = React.createClass({
             ImageStore.setFilter(inputName, this.state[inputName]);
             ServerActionCreators.changeFilter();
         }
-        var m;
+    },
+    handleSizeBlur: function(inputName){
+        ImageStore.setFilter(inputName, this.state[inputName]);
+        ServerActionCreators.changeFilter();
     },
 
     render: function() {
@@ -106,13 +109,10 @@ var Options = React.createClass({
                 placeholder="Автор"
                 value={this.state.author}
             />
-            Ширина
-            <Input placeholder="От" type="text" value={this.state.widthFrom} onChange={this.handleSizeInput.bind(this, 'widthFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'widthFrom')}/>px
-            <Input placeholder="До" type="text" value={this.state.widthTo} onChange={this.handleSizeInput.bind(this, 'widthTo')} onKeyPress={this.handleSizeEnter.bind(this, 'widthTo')}/>px
-            <br/>
-            Высота
-            <Input placeholder="От" type="text" value={this.state.heightFrom} onChange={this.handleSizeInput.bind(this, 'heightFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'heightFrom')}/>px
-            <Input placeholder="До" type="text" value={this.state.heightTo} onChange={this.handleSizeInput.bind(this, 'heightTo')} onKeyPress={this.handleSizeEnter.bind(this, 'heightTo')}/>px
+            <Input placeholder="От" type="text" value={this.state.widthFrom} onBlur={this.handleSizeBlur.bind(this, 'widthFrom')} onChange={this.handleSizeInput.bind(this, 'widthFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'widthFrom')}/>px
+            <Input placeholder="До" type="text" value={this.state.widthTo} onBlur={this.handleSizeBlur.bind(this, 'widthTo')} onChange={this.handleSizeInput.bind(this, 'widthTo')} onKeyPress={this.handleSizeEnter.bind(this, 'widthTo')}/>px
+            <Input placeholder="От" type="text" value={this.state.heightFrom} onBlur={this.handleSizeBlur.bind(this, 'heightFrom')} onChange={this.handleSizeInput.bind(this, 'heightFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'heightFrom')}/>px
+            <Input placeholder="До" type="text" value={this.state.heightTo} onBlur={this.handleSizeBlur.bind(this, 'heightTo')} onChange={this.handleSizeInput.bind(this, 'heightTo')} onKeyPress={this.handleSizeEnter.bind(this, 'heightTo')}/>px
 
 
             </div>
