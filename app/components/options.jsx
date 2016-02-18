@@ -2,9 +2,12 @@ import React from 'react';
 import style from './style';
 import WebAPIUtils from './../utils/WebAPIUtils';
 import { RadioGroup, RadioButton } from 'react-toolbox';
+import DatePicker from 'react-toolbox/lib/date_picker';
+import Input from 'react-toolbox/lib/input';
 var EventEmitter = require('events').EventEmitter;
 var ServerActionCreators = require('../actions/ServerActionCreators');
 var ImageStore = require('../stores/ImageStore');
+import Autocomplete from 'react-toolbox/lib/autocomplete';
 
 var Options = React.createClass({
 
@@ -12,8 +15,23 @@ var Options = React.createClass({
 
     getInitialState: function(){
       return {
-          origin: 'all'
+          origin: 'all',
+          author: ''
       }
+    },
+    componentWillMount: function(){
+        var that = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://dev-fotobank.mirtv.ru/author/all/', true);
+        xhr.onload = function() {
+            var resp = JSON.parse(xhr.responseText);
+            that.setState({source:resp});
+        };
+        xhr.onerror = function() {
+            alert( 'Ошибка получения файла!' + xhr.status );
+        };
+        xhr.send();
+        this.setState({query: []});
     },
 
     handleRadioChange: function(value){
@@ -23,6 +41,42 @@ var Options = React.createClass({
         ImageStore.setFilter('origin', value);
         ServerActionCreators.changeFilter();
     },
+    dateFromChange: function(value){
+        this.setState({
+            dateFrom:value
+        });
+        ImageStore.setFilter('dateFrom', value);
+        ServerActionCreators.changeFilter();
+
+    },
+    dateToChange: function(value){
+        this.setState({
+            dateTo:value
+        });
+        ImageStore.setFilter('dateTo', value);
+        ServerActionCreators.changeFilter();
+
+    },
+    handleAuthorChange: function(value) {
+        var m;
+        this.setState({
+            author:value
+        });
+        ImageStore.setFilter('author', value);
+        ServerActionCreators.changeFilter();
+    },
+    handleSizeInput: function(inputName, value){
+        this.setState({
+        ...this.state, [inputName]: value //колдовство
+        });
+    },
+    handleSizeEnter: function(inputName, event){
+        if(event.which == 13){
+            ImageStore.setFilter(inputName, this.state[inputName]);
+            ServerActionCreators.changeFilter();
+        }
+        var m;
+    },
 
     render: function() {
         return <div>
@@ -31,6 +85,36 @@ var Options = React.createClass({
             <RadioButton label='Старый фотобанк' value='obsolete'/>
             <RadioButton label='Все' value='all'/>
         </RadioGroup>
+            <section>
+                Дата
+                <DatePicker
+                    label='От'
+                    onChange={this.dateFromChange}
+                    value={this.state.dateFrom}
+                />
+
+                <DatePicker
+                    label='До'
+                    onChange={this.dateToChange}
+                    value={this.state.dateTo}
+                />
+            </section>
+            <Autocomplete
+                direction="down"
+                onChange={this.handleAuthorChange}
+                source={this.state.source}
+                placeholder="Автор"
+                value={this.state.author}
+            />
+            Ширина
+            <Input placeholder="От" type="text" value={this.state.widthFrom} onChange={this.handleSizeInput.bind(this, 'widthFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'widthFrom')}/>px
+            <Input placeholder="До" type="text" value={this.state.widthTo} onChange={this.handleSizeInput.bind(this, 'widthTo')} onKeyPress={this.handleSizeEnter.bind(this, 'widthTo')}/>px
+            <br/>
+            Высота
+            <Input placeholder="От" type="text" value={this.state.heightFrom} onChange={this.handleSizeInput.bind(this, 'heightFrom')} onKeyPress={this.handleSizeEnter.bind(this, 'heightFrom')}/>px
+            <Input placeholder="До" type="text" value={this.state.heightTo} onChange={this.handleSizeInput.bind(this, 'heightTo')} onKeyPress={this.handleSizeEnter.bind(this, 'heightTo')}/>px
+
+
             </div>
     }
 });

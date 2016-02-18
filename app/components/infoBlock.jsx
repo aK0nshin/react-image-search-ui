@@ -7,6 +7,10 @@ import ImageStore from '../stores/ImageStore';
 
 var Buttons = React.createClass({
     insertClick: function(){
+        var params = {
+          localpath: this.props.local_path,
+          token: 'Utyhb[Uthw2015PB'
+        };
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://dev-fotobank.mirtv.ru/image/getbinary/', true);
         xhr.onload = function() {
@@ -16,7 +20,7 @@ var Buttons = React.createClass({
         xhr.onerror = function() {
             alert( 'Ошибка получения файла!' + this.status );
         };
-        xhr.send('local_path='+this.props.local_path);
+        xhr.send(JSON.stringify(params));
     }
     ,
     render: function(){

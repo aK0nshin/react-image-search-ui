@@ -2,6 +2,7 @@ import React from 'react';
 import Superagent from 'superagent';
 import style from './style';
 import WebAPIUtils from './../utils/WebAPIUtils';
+import MaterialInput from 'react-toolbox/lib/input';
 
 
 const origin = 'http://dev-fotobank.mirtv.ru';
@@ -13,19 +14,19 @@ var Input = React.createClass ({
     superagent: {search:SuperagentSearch, suggest:SuperagentSuggest},
 
     handleKeyDown: function(event){
-        if(event.keyCode == 13){
+        if(event.which == 13){
             WebAPIUtils.getImages(0, this.state.query);
         }
     },
 
-    handleChange: function(event) {
-        this.setState({ query: event.target.value });
+    handleChange: function(value) {
+        this.setState({ query: value });
     },
 
     render: function () {
         return (
             <div className={style.searchBox}>
-                <input className={style.searchInput} placeholder="Введите запрос" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
+                <MaterialInput placeholder="Введите запрос" type="text" onChange={this.handleChange} onKeyPress={this.handleKeyDown}/>
             </div>
 
         );

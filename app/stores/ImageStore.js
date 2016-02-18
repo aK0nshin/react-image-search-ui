@@ -8,7 +8,15 @@ var CHANGE_EVENT = 'change';
 var CHANGE_FILTER_EVENT = 'changeFilter';
 
 var filter = {
-  origin:'all'
+  origin:'all',
+  author: [],
+  dateFrom: '',
+  dateTo: '',
+  widthFrom: '',
+  widthTo: '',
+  heightFrom: '',
+  heightTo: ''
+
 };
 
 var SearchQuery = null;
@@ -39,8 +47,17 @@ function _addImages(rawImages, query) {
 function _filterImages(allImages){
   var arImages = allImages.images;
   for(var i in arImages) {
+    var creationDate = new Date(arImages[i]['creationDate']);
     if (arImages[i]['origin'] == filter['origin'] || filter['origin']=='all') {
-      filtered['images'][i] = arImages[i];
+      if ((!filter['dateFrom'] || creationDate>=filter['dateFrom']) && (!filter['dateTo'] || creationDate<=filter['dateTo'])){
+        if (filter['author'].length == 0 || filter['author'].indexOf(arImages[i]['author'])>=0){
+          if((isNaN(parseInt(filter['widthFrom'])) || arImages[i]['width']>=filter['widthFrom']) && (isNaN(parseInt(filter['widthTo'])) || arImages[i]['width']<=filter['widthFrom'])){
+            if ((isNaN(parseInt(filter['heightFrom'])) || arImages[i]['height']>=filter['heightFrom']) && (isNaN(parseInt(filter['heightTo'])) || arImages[i]['height']<=filter['heightFrom'])){
+              filtered['images'][i] = arImages[i];
+            }
+          }
+        }
+      }
     }
   }
   filtered.hasMore = allImages.hasMore;

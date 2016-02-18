@@ -18,7 +18,9 @@ convertRawImage: function(rawImage) {
       eventDate: rawImage.MFEventDate,
       creationDate: rawImage.MFCreationDate,
       tags: rawImage.MFNotes,
-      origin: origin
+      origin: origin,
+      width: rawImage.EXIFImageWidth,
+      height: rawImage.EXIFImageHeight
     };
   },
 

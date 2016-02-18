@@ -24,16 +24,13 @@ $title-font-size: 1.8 * $unit;
 
 }
 body {
-  background-color: #525252;
-  background-image: url("http://localhost:82/images/Mir24.png");
   background-repeat: no-repeat;
   background-position: 50% 12%;
 
 }
 .appbar{
-  box-shadow: -3px 2px 30px 0px rgba(0, 0, 0, 0.5);
-  background:#5CA281;
-  /*background:#2ea86f;*/
+  /*box-shadow: -3px 2px 30px 0px rgba(0, 0, 0, 0.5);*/
+  background:#2196F3;
 }
 .appbar {
   > .title {
@@ -54,11 +51,11 @@ body {
   margin-left:55px;
 }
 .searchBox input {
-  background: rgba(255, 255, 255, 0.25);
-  color:#FFF;
+  /*background: rgba(255, 255, 255, 0.25);*/
+  color:#000;
   border:none;
-  border-radius: 0.2rem;
-  border-bottom:2px solid grey;
+  /*border-radius: 0.2rem;*/
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 .searchInput {
   padding: 0 5px;
@@ -68,12 +65,12 @@ body {
   margin-bottom: 15px;
 }
 .searchInput:focus{
-  border-bottom: 2px solid #2ea86f;
+  border-bottom: 2px solid #2196F3;
 }
 .gallery {
   float: left;
   height: 730px;
-  width:60%;
+  width:57%;
   padding-left: 10px;
   /*overflow-y: scroll;*/
 }
@@ -128,7 +125,7 @@ body {
   height: 730px;
 }
 .infoBlockEmpty {
-  color: #B3B3B3;
+  color: #cdcdcd;
   font-size:2em;
   padding-top: 350px;
   text-align: center;
@@ -140,7 +137,7 @@ body {
   width: 100%;
 }
 .infoTable td {
-  color: #FFF;
+  color: #000000;
   height: 50px;
   font-size: 0.8em;
 }
@@ -148,7 +145,7 @@ body {
   width: 28%;
 }
 .infoTable td:last-child {
-  color:#C1C1C1;
+  color: #494949;
 }
 .imagePreview{
   border:none;
