@@ -16,8 +16,9 @@ var ListItem = React.createClass({
     },
     render: function() {
         if (this.props.link) {
+            var tooltip = 'Оригинальный размер: '+this.props.width+'x'+this.props.height;
             return <div className={style.infiniteListItem} onClick={this.onClick}>
-                <div className={style.imgMask}></div>
+                <div className={style.imgMask} data-tooltip={tooltip}></div>
                 <img id={this.props.key} src={this.props.link}/>
             </div>;
         } else {

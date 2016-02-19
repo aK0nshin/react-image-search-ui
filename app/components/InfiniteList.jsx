@@ -29,8 +29,9 @@ var InfiniteList = React.createClass({
     },
     _onChangeFilter: function(){
         var filteredElements = this.buildElements('filter');
+        var elements = (filteredElements.length == 0) ? false : filteredElements;
         this.setState({
-            elements: filteredElements
+            elements: elements
         });
     },
     getInitialState: function(){
@@ -44,7 +45,7 @@ var InfiniteList = React.createClass({
         var allImg = ImageStore.getAll();
         var elements = [];
         for(var i in allImg.images) {
-            elements.push(<ListItem key={allImg.images[i]['id']} imageId={allImg.images[i]['id']} link={allImg.images[i]['thumb_path']}/>);
+            elements.push(<ListItem key={allImg.images[i]['id']} imageId={allImg.images[i]['id']} link={allImg.images[i]['thumb_path']} width={allImg.images[i]['width']} height={allImg.images[i]['height']}/>);
         }
         if (allImg.hasMore && mode == 'new'){
             var page = ++this.state.page;

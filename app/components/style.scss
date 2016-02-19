@@ -91,6 +91,27 @@ body {
   vertical-align: middle;
   margin: 5px;
 }
+.imgMask::after {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  content: attr(data-tooltip);
+  margin-top: 164px;
+  margin-left: -100px;
+  font-size: 0.8em;
+  opacity: 0;
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden;
+
+  transition: all 0.4s ease-in-out;
+}
+
+.imgMask:hover::after {
+  opacity: 1; /* Показываем его */
+  visibility: visible;
+}
 .noThumb {
   background: url('http://localhost:82/images/no-preview.png');
   position:relative;
