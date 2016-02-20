@@ -1,12 +1,12 @@
 module.exports = {
 
 convertRawImage: function(rawImage) {
-    var thumb = (rawImage.thumb_path) ? 'http://dev-fotobank.mirtv.ru/'+rawImage.thumb_path : false;
+    var thumb = (rawImage.thumb_path) ? 'https://dev-fotobank.mirtv.ru/'+rawImage.thumb_path : false;
     var origin = (rawImage.image_id_obsolete) ? 'obsolete' : 'new';
 
   return {
       id: rawImage.image_id,
-      link: 'http://dev-fotobank.mirtv.ru/'+rawImage.webpath,
+      link: 'https://dev-fotobank.mirtv.ru/'+rawImage.webpath,
       thumb_path: thumb,
       local_path: rawImage.local_path,
       title: rawImage.MFTitle,

@@ -5,7 +5,7 @@ import WebAPIUtils from './../utils/WebAPIUtils';
 import MaterialInput from 'react-toolbox/lib/input';
 
 
-const origin = 'http://dev-fotobank.mirtv.ru';
+const origin = 'https://dev-fotobank.mirtv.ru';
 
 var SuperagentSearch = Superagent.post(origin + '/image/search/');
 var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uthw2015PB&term=путин");

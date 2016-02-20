@@ -22,7 +22,7 @@ var Options = React.createClass({
     componentWillMount: function(){
         var that = this;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://dev-fotobank.mirtv.ru/author/all/', true);
+        xhr.open('GET', 'https://dev-fotobank.mirtv.ru/author/all/', true);
         xhr.onload = function() {
             var resp = JSON.parse(xhr.responseText);
             that.setState({source:resp});
