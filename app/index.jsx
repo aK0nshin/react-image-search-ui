@@ -6,20 +6,20 @@ import ToolboxApp from 'react-toolbox/lib/app';
 import Button from 'react-toolbox/lib/button';
 import Header from './components/header';
 import Input from './components/Input';
-import Gallery from './components/gallery';
 import InfoBlock from './components/infoBlock';
+import InfiniteList from './components/InfiniteList';
+import Options from './components/options';
 import style from './style';
 import ImageExampleData from './ImageExampleData';
-import WebAPIUtils from './utils/WebAPIUtils';
 
 ImageExampleData.init();
-WebAPIUtils.getAllImages();
 
 ReactDOM.render((
     <ToolboxApp>
     <Header />
     <Input />
-    <Gallery />
+    <Options />
+    <InfiniteList />
     <InfoBlock />
     </ToolboxApp>
 ), document.getElementById('app'));

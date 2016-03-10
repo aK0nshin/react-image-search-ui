@@ -1,17 +1,11 @@
 import React from 'react';
 import Superagent from 'superagent';
 import style from './style';
-import Autocomplete from 'react-toolbox/lib/autocomplete';
+import WebAPIUtils from './../utils/WebAPIUtils';
+import MaterialInput from 'react-toolbox/lib/input';
 
-const source = {
-    'ES': 'Spain',
-    'TH': 'Thailand',
-    'EN': 'England',
-    'US': 'USA'
 
-};
-
-const origin = 'http://dev-fotobank.mirtv.ru';
+const origin = 'https://dev-fotobank.mirtv.ru';
 
 var SuperagentSearch = Superagent.post(origin + '/image/search/');
 var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uthw2015PB&term=путин");
@@ -19,37 +13,20 @@ var SuperagentSuggest = Superagent.get(origin + "/image/suggest/?token=Utyhb[Uth
 var Input = React.createClass ({
     superagent: {search:SuperagentSearch, suggest:SuperagentSuggest},
 
+    handleKeyDown: function(event){
+        if(event.which == 13){
+            WebAPIUtils.getImages(0, this.state.query);
+        }
+    },
+
     handleChange: function(value) {
-        this.superagent.search.send({query:"путин", page:0, token:"Utyhb[Uthw2015PB"})
-        .end(function(){});
-    },
-
-    handleEdit: function(value) {
-      debug.log("Gothhca!");
-      debug.log(value);
-    },
-
-    componentWillMount: function(){
-        this.setState({query: []});
-        this.setState({source:source});
-    },
-
-    componentDidMount(){
-        console.log(this.props);
+        this.setState({ query: value });
     },
 
     render: function () {
-        var currentSearch = this.state.query;
         return (
             <div className={style.searchBox}>
-            <Autocomplete
-            direction="down"
-            label="Введите запрос:"
-            onChange={this.handleChange}
-            onEdit={this.handleEdit}
-            source={source}
-            value={currentSearch}
-            />
+                <MaterialInput placeholder="Введите запрос" type="text" onChange={this.handleChange} onKeyPress={this.handleKeyDown}/>
             </div>
 
         );

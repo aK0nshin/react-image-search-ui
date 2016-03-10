@@ -1,7 +1,26 @@
-  convertRawImage: function(rawImage) {
-    return {
-      id: rawImage.id,
-      link: rawImage.link,
+module.exports = {
+
+convertRawImage: function(rawImage) {
+    var thumb = (rawImage.thumb_path) ? 'https://dev-fotobank.mirtv.ru/'+rawImage.thumb_path : false;
+    var origin = (rawImage.image_id_obsolete) ? 'obsolete' : 'new';
+
+  return {
+      id: rawImage.image_id,
+      link: 'https://dev-fotobank.mirtv.ru/'+rawImage.webpath,
+      thumb_path: thumb,
+      local_path: rawImage.local_path,
+      title: rawImage.MFTitle,
+      description: rawImage.MFDescription,
+      category: rawImage.MFCategory,
+      locality: rawImage.MFLocality,
+      author: rawImage.MFAuthor,
+      source: rawImage.MFSource,
+      eventDate: rawImage.MFEventDate,
+      creationDate: rawImage.MFCreationDate,
+      tags: rawImage.MFNotes,
+      origin: origin,
+      width: rawImage.EXIFImageWidth,
+      height: rawImage.EXIFImageHeight
     };
   },
 

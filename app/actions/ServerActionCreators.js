@@ -5,18 +5,19 @@ var ActionTypes = AppConstants.ActionTypes;
 
 module.exports = {
 
-  receiveAll: function(rawImages) {
+  receiveAll: function(rawImages, query, page) {
     AppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_IMAGES,
-      rawImages: rawImages
+      rawImages: rawImages,
+      query: query,
+      page: page
     });
   },
-
-  receiveCreatedImage: function(createdImage) {
+  changeFilter: function(){
     AppDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_CREATED_IMAGE,
-      rawImage: createdImage
+      type: ActionTypes.CHANGE_FILTER_STATE
     });
   }
+
 
 };

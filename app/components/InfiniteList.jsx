@@ -2,49 +2,69 @@ import React from 'react';
 import ListItem from '../components/ListItem';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
 import style from './style';
-
-function getImageStore() {
-  return {
-    allTodos: ImageStore.getAll()
-  };
-}
+import ImageStore from '../stores/ImageStore';
+import WebAPIUtils from './../utils/WebAPIUtils';
 
 var InfiniteList = React.createClass({
-    getInitialState: function() {
+
+    componentDidMount: function() {
+        ImageStore.addChangeListener(this._onChange);
+        ImageStore.addChangeFilterListener(this._onChangeFilter);
+    },
+    componentWillUnmount: function() {
+        ImageStore.removeChangeListener(this._onChange);
+        ImageStore.removeChangeFilterListener(this._onChangeFilter);
+    },
+    _onChange: function(query, page) {
+        this.setState({
+            firstStart:false,
+            isInfiniteLoading: true,
+            page:page
+        });
+        var newElements = this.buildElements('new');
+        this.setState({
+            elements: newElements,
+            query:query
+        });
+    },
+    _onChangeFilter: function(){
+        var filteredElements = this.buildElements('filter');
+        var elements = (filteredElements.length == 0) ? false : filteredElements;
+        this.setState({
+            elements: elements
+        });
+    },
+    getInitialState: function(){
         return {
-            elements: this.buildElements(0, 100),
-            isInfiniteLoading: false
-
+            firstStart:true
         }
-
     },
 
-    buildElements: function(start, end) {
-        var elements = [];
-        for (var i = start; i < end; i++) {
-            elements.push(<ListItem key={i} index={i}/>)
 
+    buildElements: function(mode) {
+        var allImg = ImageStore.getAll();
+        var elements = [];
+        for(var i in allImg.images) {
+            elements.push(<ListItem key={allImg.images[i]['id']} imageId={allImg.images[i]['id']} link={allImg.images[i]['thumb_path']} width={allImg.images[i]['width']} height={allImg.images[i]['height']}/>);
+        }
+        if (allImg.hasMore && mode == 'new'){
+            var page = ++this.state.page;
+            this.setState({
+                page:page,
+                isInfiniteLoading: false
+            });
         }
         return elements;
-
     },
 
     handleInfiniteLoad: function() {
-        var that = this;
-        this.setState({
-            isInfiniteLoading: true
-
-        });
-        setTimeout(function() {
-            var elemLength = that.state.elements.length,
-                newElements = that.buildElements(elemLength, elemLength + 100);
-            that.setState({
-                isInfiniteLoading: false,
-                elements: that.state.elements.concat(newElements)
-
+        if (!this.state.firstStart) { //Проверить на пустоту
+            WebAPIUtils.getImages(this.state.page, this.state.query);
+        } else {
+            this.setState({
+                isInfiniteLoading: false
             });
-
-        }, 2500);
+        }
 
     },
 
@@ -52,21 +72,24 @@ var InfiniteList = React.createClass({
         return <div className={style.loader}>
         <ProgressBar type="circular" mode="indeterminate" />
             </div>;
-
     },
 
     render: function() {
-        return <Infinite elementHeight={20}
-        containerHeight={730}
-        infiniteLoadBeginEdgeOffset={200}
-        onInfiniteLoad={this.handleInfiniteLoad}
-        loadingSpinnerDelegate={this.elementInfiniteLoad()}
-        isInfiniteLoading={this.state.isInfiniteLoading}
-        timeScrollStateLastsForAfterUserScrolls={0}
-        >
-        {this.state.elements}
-        </Infinite>;
-
+            if (this.state.elements) {
+                return <div className={style.gallery}>
+                    <Infinite elementHeight={20}
+                              containerHeight={730}
+                              infiniteLoadBeginEdgeOffset={1}
+                              onInfiniteLoad={this.handleInfiniteLoad}
+                              loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                              isInfiniteLoading={this.state.isInfiniteLoading}
+                        >
+                        {this.state.elements}
+                    </Infinite>
+                </div>;
+            } else {
+                return false;
+            }
     }
 
 });

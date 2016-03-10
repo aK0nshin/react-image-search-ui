@@ -8,6 +8,30 @@ $title-font-size: 1.8 * $unit;
 // your build comes with React Toolbox's and we can't
 // ensure the order. You can either set a wrapper or target
 // React Toolbox data attributes to boost
+::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+
+}
+body {
+  background-repeat: no-repeat;
+  background-position: 50% 12%;
+
+}
+.appbar{
+  /*box-shadow: -3px 2px 30px 0px rgba(0, 0, 0, 0.5);*/
+  background:#2196F3;
+}
 .appbar {
   > .title {
     font-size: $title-font-size;
@@ -27,14 +51,28 @@ $title-font-size: 1.8 * $unit;
   margin-left:55px;
 }
 .searchBox input {
-  border:1px solid #d3d3d3
+  /*background: rgba(255, 255, 255, 0.25);*/
+  color:#000;
+  border:none;
+  /*border-radius: 0.2rem;*/
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.searchInput {
+  padding: 0 5px;
+  margin-top: 20px;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 15px;
+}
+.searchInput:focus{
+  border-bottom: 2px solid #2196F3;
 }
 .gallery {
   float: left;
   height: 730px;
-  width:60%;
+  width:57%;
   padding-left: 10px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 .loader{
   clear:both;
@@ -43,16 +81,60 @@ $title-font-size: 1.8 * $unit;
   margin-left:495px;
 }
 .infiniteListItem {
+  position:relative;
   color:#547696;
   display: block;
-  padding-top: 90px;
   float: left;
   width: 200px;
   height: 200px;
   text-align: center;
-  background-color: #89B9E8;
   vertical-align: middle;
   margin: 5px;
+}
+.imgMask::after {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  content: attr(data-tooltip);
+  margin-top: 164px;
+  margin-left: -100px;
+  font-size: 0.8em;
+  opacity: 0;
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden;
+
+  transition: all 0.4s ease-in-out;
+}
+
+.imgMask:hover::after {
+  opacity: 1; /* Показываем его */
+  visibility: visible;
+}
+.noThumb {
+  background: url('http://localhost:82/images/no-preview.png');
+  position:relative;
+  display: block;
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+.imgMask {
+  cursor:pointer;
+  position:absolute;
+  width: 200px;
+  height: 200px;
+  background:rgba(0, 0, 0, 0.12);
+}
+.imgMask:hover{
+  background:rgba(0, 0, 0, 0);
+
+}
+.infiniteListItem>img {
+  width: 200px;
+  height: 200px;
 }
 .infiniteListItem:hover{
   background-color: #9bcfff;
@@ -63,27 +145,40 @@ $title-font-size: 1.8 * $unit;
   width:40%;
   height: 730px;
 }
+.infoBlockEmpty {
+  color: #cdcdcd;
+  font-size:2em;
+  padding-top: 350px;
+  text-align: center;
+  float:right;
+  width:40%;
+  height: 730px;
+}
 .infoTable {
   width: 100%;
 }
 .infoTable td {
-  height: 40px;
+  color: #000000;
+  height: 50px;
   font-size: 0.8em;
 }
 .infoTable td:first-child {
   width: 28%;
 }
 .infoTable td:last-child {
-  color:#828282;
+  color: #494949;
 }
 .imagePreview{
-  color:#547696;
+  border:none;
   width: 300px;
   height:200px;
   background-color:#89B9E8;
   text-align:center;
-  padding-top:85px;
   margin:auto;
+}
+.imagePreview>img{
+  width: 300px;
+  height:200px;
 }
 .buttons {
   margin-top: 20px;
@@ -94,4 +189,8 @@ $title-font-size: 1.8 * $unit;
 }
 .buttons button:first-child {
   margin-right: 70px;
+}
+.sidebar {
+  width: 500px !important;
+  overflow-y: auto !important;
 }
