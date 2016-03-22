@@ -13,7 +13,6 @@ module.exports = {
 
   getImages: function(page, query) {
     // simulate retrieving data from a database
-
     var superagent = Superagent.post('http://dev-fotobank.mirtv.ru/image/search/');
     superagent.send({query:query, page:page, token:"Utyhb[Uthw2015PB", external_client: true})
         .end(function(err, res){
@@ -21,10 +20,17 @@ module.exports = {
           rawImages.images = res.body.data;
           rawImages.hasMore= res.body.meta.hasMore;
           ServerActionCreators.receiveAll(rawImages, query, page);
-
         });
+  },
 
-
+  setMeta: function(metaName, newValue, photoId) {
+    var superagent = Superagent.post('http://dev-fotobank.mirtv.ru/image/save');
+    superagent.send({name:metaName, value:newValue, pk:photoId, token:"Utyhb[Uthw2015PB", external_client: true})
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        .end(function(err, res){
+          console.log(err, res);
+        });
   },
 
   createImages: function(images) {

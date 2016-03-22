@@ -2,5 +2,8 @@
 
 ### Getting Started
 1. Clone this repository
-2. Run `npm install && npm start`
-3. Visit `0.0.0.0:8080` in your browser
+2. Run npm install
+3. cd /path/to/react-image-search-ui 
+4. npm install core-js
+5. npm start
+6. Visit "127.0.0.1:10000" in your browser

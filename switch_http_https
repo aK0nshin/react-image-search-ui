@@ -1,0 +1,9 @@
+http => https
+https => http
+
+app/components/Input.jsx
+app/components/options.jsx
+app/components/infoBlock.jsx
+app/utils/ImageUtils.js
+app/utils/WebAPIUtils.js
+
